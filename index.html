@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Star Wars Pictures</title>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="header">
+      <img src="images/starwars.jpg"  />
+    </div>
+    
+   <div class="row" id="pics">
+      <div class="col l12">
+          <p> Chose your favorite character </p>
+      </div>
+    
+	
+	<div class="ligne">
+  <div class="col l2">
+        <div class="card mycard">
+          <div class="card-image">
+            <img height = "300px" src="images/leia.jpg"/>
+          </div>
+          <div>
+            <button class="button" id="leia">Leia</button>
+        </div>
+      </div>
+    </div>
+
+    
+      <div class="col l2">
+        <div class="card mycard">
+          <div class="card-image">
+            <img height = "300px" src="images/darthvader.jpg"/>
+          </div>
+          <div>
+            <button class="button" id="darkvador">Dark Vador</button>
+        </div>
+      </div>
+    </div>
+	
+	
+	
+	<div class="col l2">
+      <div class="card mycard" >
+        <div class="card-image">
+          <img height = "300px"  src="images/yoda.jpg"/>
+        </div>
+        <div>
+          <button class="button" id="yoda">Yoda</button>
+      </div>
+    </div>
+	</div>
+    </div>
+	
+	
+	<div class ="ligne">
+  <div class="col l2">
+    <div class="card mycard">
+      <div class="card-image">
+        <img height = "300px" src="images/palpatine.jpg"/>
+      </div>
+      <div>
+        <button class="button" id="palpatine">Palpatine</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="col l2">
+      <div width="200px" class="card mycard" >
+        <div class="card-image">
+          <img  height = "300px" src="images/obiwan.jpg"/>
+          <span class="card-title"></span>
+        </div>
+        <div >
+          <button class="button" id="obiwan">Obi Wan</button>
+      </div>
+    </div>
+	</div>
+	
+	
+	
+<div class="col l2">
+  <div class="card mycard">
+    <div class="card-image">
+      <img  height = "300px" src="images/dooku.jpg"/>
+    </div>
+    <div >
+      <button class="button" id="dooku">Dooku</button>
+  </div>
+</div>
+</div>
+</div>
+<div class="container">
+<p>Or get a random picture</p>
+      <button  id="random">Error</button>
+      <h3 id="qcontainer"></h3>
+      <h3 id="acontainer" ></h3>
+    </div>
+  </div>
+   <script type="text/babel">
+   
+   var picture = [{
+  'author': '- Senator palpatine',
+  'picture': 'Palpatine.jpg'
+}, {
+  'author': '- Count Dooku',
+  'picture': 'Dooku.jpg'
+}, {
+  'author': '- Princess leia',
+  'picture': 'Princess Leia.jpg'
+}, {
+  'author': '- Yoda',
+  'picture': 'Yoda.jpg'
+}, {
+  'author': '- Obi-Wan-Kenobi',
+  'picture': 'Obi-Wan-Kenobi.jpg'
+}, {
+  'author': '- Darth Vader',
+  'picture': 'Dark Vador.jpg'
+}];
+
+   function getrandpicture()
+{
+  var randpicture = Math.floor((Math.random() * picture.length) + 1);
+  ReactDOM.render(<img src={picture[randpicture].picture} />, document.getElementById('acontainer'));
+
+}
+
+function Getpicture(author) 
+{
+var rnd = Math.floor((Math.random() * 11));
+var end = 0;
+
+	while(!end)
+		{
+			if(picture[rnd].author.indexOf(author)>-1)
+			{
+				end = 1;
+				console.log(picture[rnd].author);
+			}
+			
+			else
+			{
+				rnd = Math.floor((Math.random() * 11));
+			}
+			
+			
+			
+		}
+		console.log(picture[rnd].picture);
+		ReactDOM.render(<h2>{picture[rnd].picture}</h2>, document.getElementById('qcontainer'));
+		ReactDOM.render(<h2>{picture[rnd].author}</h2>, document.getElementById('acontainer'));}
+		
+
+
+	
+	var Random = React.createClass( {
+      getInitialState: function() {return {pressed: false}; },
+      handleClick: function(event) { getrandpicture(); },
+      render: function() { return (<p onClick={this.handleClick}>Random picture</p>);}});
+	  var Yoda = React.createClass( {
+      getInitialState: function() {return {pressed: false}; },
+      handleClick: function(event) { Getpicture("- Yoda"); },
+      render: function() { return (<h4 onClick={this.handleClick}>Yoda</h4>);}});
+    var Obiwan = React.createClass( {
+      getInitialState: function() {return {pressed: false}; },
+      handleClick: function(event) { Getpicture("- Obi-Wan-Kenobi"); },
+      render: function() { return (<h4 onClick={this.handleClick}>Obi-Wan-Kenobi</h4>);}});
+    var Darthvader = React.createClass( {
+      getInitialState: function() {return {pressed: false}; },
+      handleClick: function(event) { Getpicture("- Darth Vader"); },
+      render: function() { return (<h4 onClick={this.handleClick}>Darth Vador</h4>);}});
+    var Leia = React.createClass( {
+      getInitialState: function() {return {pressed: false}; },
+      handleClick: function(event) { Getpicture("- Princess leila"); },
+      render: function() { return (<h4 onClick={this.handleClick}>Leia</h4>);}});
+    var Palpatine = React.createClass( {
+      getInitialState: function() {return {pressed: false}; },
+      handleClick: function(event) { Getpicture("- Senator palpatine"); },
+      render: function() { return (<h4 onClick={this.handleClick}>Palpatine</h4>);}});
+    var Dooku = React.createClass( {
+      getInitialState: function() {return {pressed: false}; },
+      handleClick: function(event) { Getpicture("- Count Dooku"); },
+      render: function() { return (<h4 onClick={this.handleClick}>Dooku</h4>);}});
+
+      ReactDOM.render(<Random />, document.getElementById('random'));
+      ReactDOM.render(<Yoda />, document.getElementById('yoda'));
+      ReactDOM.render(<Obiwan />, document.getElementById('obiwan'));
+      ReactDOM.render(<Leia />, document.getElementById('leia'));
+      ReactDOM.render(<Darthvader />, document.getElementById('darthvader'));
+      ReactDOM.render(<Palpatine />, document.getElementById('palpatine'));
+      ReactDOM.render(<Dooku />, document.getElementById('dooku'));
+ </script>
+  </body>
+</html>
